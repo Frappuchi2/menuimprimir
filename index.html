@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Imprimible - Aroma & Café</title>
+    <title>Menú Librito - Aroma & Café</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
@@ -17,9 +17,9 @@
                     },
                     colors: {
                         theme: {
-                            beige: '#FAF4EF',      /* C:2 M:4 Y:6 K:0 */
-                            orange: '#E85D22',     /* Naranja CMYK */
-                            pink: '#E08B9D',       /* Rosa CMYK */
+                            beige: '#FAF4EF',      
+                            orange: '#E85D22',     
+                            pink: '#E08B9D',       
                             pinkLight: '#FCEAEF',
                             textMain: '#3D302D',   
                             textMuted: '#7A6863',  
@@ -34,18 +34,18 @@
         .dotted-leader {
             flex-grow: 1;
             border-bottom: 2px dotted #E3CFC9;
-            margin: 0 12px;
+            margin: 0 10px;
             position: relative;
-            top: -5px;
+            top: -4px;
         }
         
-        /* === CONFIGURACIÓN DE PÁGINA CARTA (8.5" x 11") === */
+        /* === CONFIGURACIÓN DE PÁGINA A5 VERTICAL (148.5mm x 210mm) === */
         .print-page {
-            width: 8.5in;
-            height: 11in;
+            width: 148.5mm;
+            height: 210mm;
             margin: 0 auto 2rem auto;
             background-color: #FAF4EF;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -54,7 +54,7 @@
 
         @media print {
             @page {
-                size: letter portrait; /* Hoja Carta estándar */
+                size: 148.5mm 210mm; /* A5 Vertical */
                 margin: 0; 
             }
             body {
@@ -66,10 +66,10 @@
                 display: block;
             }
             .print-page {
-                margin: 0 !important;
+                margin: 0 auto !important;
                 box-shadow: none !important;
-                height: 11in !important; 
-                page-break-after: always; /* Salto de página estricto */
+                border: none !important;
+                page-break-after: always;
                 page-break-inside: avoid;
             }
             .hide-on-print {
@@ -78,264 +78,302 @@
         }
     </style>
 </head>
-<body class="bg-gray-300 min-h-screen flex flex-col items-center py-8">
+<body class="bg-gray-300 min-h-screen flex flex-col items-center py-6 font-sans">
 
-    <!-- Botón de impresión -->
-    <button onclick="window.print()" class="hide-on-print mb-8 bg-theme-textMain text-white px-8 py-4 rounded-full font-sans font-bold text-lg shadow-xl hover:bg-theme-orange hover:scale-105 transition-all flex items-center gap-3 z-50 sticky top-4">
-        <i data-lucide="printer" class="w-6 h-6"></i> Imprimir en Tamaño Carta
-    </button>
+    <!-- Instrucciones y Botón de impresión -->
+    <div class="hide-on-print flex flex-col items-center mb-6 z-50 sticky top-2">
+        <div class="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-2 rounded-xl mb-3 text-sm shadow-sm text-center max-w-md">
+            <span class="font-bold">💡 Para formato Librito:</span> En la ventana de impresión selecciona <b>"Folleto" o "Booklet"</b> si usas hojas A4, o simplemente <b>"Doble cara"</b> si imprimes en hojas tamaño A5.
+        </div>
+        <button onclick="window.print()" class="bg-theme-textMain text-white px-8 py-3 rounded-full font-sans font-bold text-base shadow-xl hover:bg-theme-orange hover:scale-105 transition-all flex items-center gap-2">
+            <i data-lucide="printer" class="w-5 h-5"></i> Imprimir Librito A5
+        </button>
+    </div>
 
     <!-- Contenedor Principal de Impresión -->
     <div id="print-wrapper" class="w-full">
 
-        <!-- ================= SECCIÓN 1: BEBIDAS ================= -->
+        <!-- ================= PÁGINA 1: PORTADA ================= -->
         <div class="print-page border border-gray-300">
-            <!-- Encabezado con Logo (Solo en Portada) -->
-            <div class="bg-theme-orange w-full flex flex-col items-center justify-center py-3 relative shrink-0 h-32">
-                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
-                <img src="logo.jpg" alt="" class="h-20 w-auto object-contain drop-shadow-lg rounded-xl bg-white/20 p-2 relative z-10">
-                <p class="text-theme-pinkLight font-sans font-medium mt-1 tracking-widest uppercase text-[10px] relative z-10">un cafecito siempre viene bien</p>
+            <div class="bg-theme-orange w-full h-10 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
+            </div>
+            
+            <div class="flex-grow flex flex-col items-center justify-center p-8 relative">
+                <!-- Decoración de fondo tenue -->
+                <i data-lucide="coffee" class="absolute w-64 h-64 text-theme-orange opacity-5 -right-10 -bottom-10"></i>
+                
+                <div class="bg-white/50 p-4 rounded-3xl shadow-sm border border-theme-border/50 mb-6 relative z-10">
+                    <img src="logo.jpg" alt="Logo de Aroma y Café" class="w-48 h-auto object-contain rounded-2xl drop-shadow-md">
+                </div>
+                
+                <h1 class="font-serif font-bold text-3xl text-theme-textMain tracking-widest uppercase mb-2 relative z-10">Menú</h1>
+                <div class="w-16 h-1 bg-theme-pink rounded-full mb-4 relative z-10"></div>
+                <p class="text-theme-textMuted font-medium tracking-[0.2em] uppercase text-[10px] text-center relative z-10">un cafecito siempre viene bien</p>
             </div>
 
-            <!-- Contenido (1 Columna Espaciosa) -->
-            <div class="py-5 px-10 flex-grow flex flex-col justify-start">
-                <div>
-                    <div class="flex justify-between items-end border-b-2 border-theme-border pb-2 mb-4">
-                        <h2 class="text-2xl font-serif font-bold text-theme-orange flex items-center uppercase tracking-wide">
-                            <i data-lucide="coffee" class="w-7 h-7 mr-3 text-theme-pink"></i> Bebidas
-                        </h2>
-                        <div class="flex gap-4 text-xs font-sans font-bold text-theme-textMuted uppercase tracking-widest justify-end">
-                            <span class="w-16 text-right">Chico</span>
-                            <span class="w-20 text-right">Mediano</span>
-                        </div>
+            <div class="bg-theme-orange w-full h-10 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA 2: BEBIDAS ================= -->
+        <div class="print-page border border-gray-300">
+            <div class="bg-theme-orange w-full h-4 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
+            </div>
+
+            <div class="p-8 flex-grow flex flex-col justify-start">
+                <!-- Encabezado -->
+                <div class="flex justify-between items-end border-b-2 border-theme-border pb-2 mb-6">
+                    <h2 class="text-2xl font-serif font-bold text-theme-orange flex items-center uppercase tracking-wide">
+                        <i data-lucide="coffee" class="w-6 h-6 mr-2 text-theme-pink"></i> Bebidas
+                    </h2>
+                    <div class="flex gap-4 text-[10px] font-bold text-theme-textMuted uppercase tracking-widest justify-end">
+                        <span class="w-10 text-right">Chico</span>
+                        <span class="w-14 text-right">Mediano</span>
                     </div>
+                </div>
 
-                    <div class="flex flex-col gap-2.5">
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Espresso</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$30</span><span class="w-20 text-right">$35</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Americano</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$35</span><span class="w-20 text-right">$45</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Capuchino</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$40</span><span class="w-20 text-right">$50</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Flat White</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right text-theme-textMuted font-normal opacity-50">---</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Caramel</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$60</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Latte</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-20 text-right">$45</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Moca</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$55</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Chocolate</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$40</span><span class="w-20 text-right">$50</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Cold Brew (Frío)</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-20 text-right">$60</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Latte Frío</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$65</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Chai</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-20 text-right">$55</span></div></div>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Affogato</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right text-theme-textMuted font-normal opacity-50">---</span></div></div>
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Espresso</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$30</span><span class="w-14 text-right">$35</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Americano</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$35</span><span class="w-14 text-right">$45</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Capuchino</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$40</span><span class="w-14 text-right">$50</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Flat White</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right text-theme-textMuted font-normal opacity-50">---</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Caramel</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$60</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Latte</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-14 text-right">$45</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Moca</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$55</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Chocolate</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$40</span><span class="w-14 text-right">$50</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Cold Brew (Frío)</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-14 text-right">$60</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Latte Frío</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$65</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Chai</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-14 text-right">$55</span></div></div>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Affogato</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right text-theme-textMuted font-normal opacity-50">---</span></div></div>
 
-                        <!-- Sin Café -->
-                        <h3 class="text-[13px] font-sans font-bold text-theme-textMuted mt-2 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Sin Café</h3>
-                        <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Té negro c/ frutos</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-20 text-right">$45</span></div></div>
-                        <div class="mb-0">
-                            <div class="flex justify-between items-baseline"><h4 class="text-base font-serif font-bold text-theme-textMain uppercase tracking-wide">Sodas Italianas</h4><div class="dotted-leader"></div><div class="flex gap-4 text-lg font-semibold text-theme-orange justify-end"><span class="w-16 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-20 text-right">$45</span></div></div>
-                            <p class="text-[11px] font-sans text-theme-textMuted mt-0.5 leading-relaxed pr-10">Fresa, mango, frutos rojos, zarzamora, maracuyá. Incluye perlas explosivas de manzana verde y mora azul.</p>
-                        </div>
+                    <!-- Sin Café -->
+                    <h3 class="text-[11px] font-bold text-theme-textMuted mt-4 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Sin Café</h3>
+                    <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Té negro c/ frutos</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-14 text-right">$45</span></div></div>
+                    <div class="mb-1">
+                        <div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Sodas Italianas</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right text-theme-textMuted font-normal opacity-50">---</span><span class="w-14 text-right">$45</span></div></div>
+                        <p class="text-[9px] text-theme-textMuted mt-0.5 leading-tight pr-6">Fresa, mango, frutos rojos, zarzamora, maracuyá. Incluye perlas explosivas de manzana verde/mora azul.</p>
                     </div>
                 </div>
 
                 <!-- Extras Bebidas -->
-                <div class="mt-8 bg-theme-pinkLight/40 p-4 rounded-2xl border border-theme-border/60">
-                    <h2 class="text-base font-serif font-bold text-theme-orange mb-2 border-b border-theme-border pb-1.5">Agrega a tu gusto</h2>
-                    <div class="flex flex-col gap-2 text-[13px] font-sans text-theme-textMain">
+                <div class="mt-auto bg-theme-pinkLight/40 p-4 rounded-xl border border-theme-border/60">
+                    <h2 class="text-[12px] font-serif font-bold text-theme-orange mb-2 border-b border-theme-border pb-1.5">Agrega a tu gusto</h2>
+                    <div class="flex flex-col gap-2 text-[11px] text-theme-textMain">
                         <div class="flex justify-between items-center">
-                            <span class="font-medium">Shot extra de Espresso</span><span class="font-bold text-theme-pink text-base">+$15</span>
+                            <span class="font-medium">Shot extra de Espresso</span><span class="font-bold text-theme-pink">+$15</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="font-medium">Saborizantes (Cajeta, Nutella, Lotus Biscoff)</span>
-                            <div class="flex gap-6 justify-end">
-                                <span class="font-bold text-theme-pink text-base"><span class="text-xs text-theme-textMuted font-normal mr-1 uppercase">Ch</span>+$5</span>
-                                <span class="font-bold text-theme-pink text-base"><span class="text-xs text-theme-textMuted font-normal mr-1 uppercase">Gd</span>+$10</span>
+                            <span class="font-medium pr-2">Sabores (Cajeta, Nutella, Lotus Biscoff)</span>
+                            <div class="flex gap-3 justify-end shrink-0">
+                                <span class="font-bold text-theme-pink"><span class="text-[9px] text-theme-textMuted font-normal mr-0.5 uppercase">Ch</span>+$5</span>
+                                <span class="font-bold text-theme-pink"><span class="text-[9px] text-theme-textMuted font-normal mr-0.5 uppercase">Gd</span>+$10</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Margen inferior decorativo -->
-            <div class="bg-theme-orange h-6 w-full shrink-0"></div>
+            <div class="bg-theme-orange h-3 w-full shrink-0"></div>
         </div>
 
-
-        <!-- ================= SECCIÓN 2: FRAPPÉS ================= -->
+        <!-- ================= PÁGINA 3: FRAPPÉS ================= -->
         <div class="print-page border border-gray-300">
-            <!-- Encabezado Simple -->
-            <div class="bg-theme-orange w-full h-8 relative shrink-0">
-                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="bg-theme-orange w-full h-4 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
             </div>
 
-            <div class="py-8 px-10 flex-grow flex flex-col justify-start">
+            <div class="p-8 flex-grow flex flex-col justify-start">
+                <!-- Encabezado -->
                 <div class="flex justify-between items-end border-b-2 border-theme-border pb-2 mb-4">
                     <h2 class="text-2xl font-serif font-bold text-theme-orange flex items-center uppercase tracking-wide">
-                        <i data-lucide="cup-soda" class="w-7 h-7 mr-3 text-theme-pink"></i> Frappés
+                        <i data-lucide="cup-soda" class="w-6 h-6 mr-2 text-theme-pink"></i> Frappés
                     </h2>
-                    <div class="flex gap-4 text-[11px] font-sans font-bold text-theme-textMuted uppercase tracking-widest justify-end">
-                        <span class="w-16 text-right">Chico</span>
-                        <span class="w-20 text-right">Grande</span>
+                    <div class="flex gap-4 text-[10px] font-bold text-theme-textMuted uppercase tracking-widest justify-end">
+                        <span class="w-10 text-right">Chico</span>
+                        <span class="w-14 text-right">Grande</span>
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-3.5">
                     <!-- Frutales -->
                     <div>
-                        <h3 class="text-[13px] font-sans font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Frutales</h3>
-                        <div class="flex flex-col gap-1.5">
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Chidorindo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de tamarindo</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Moy de Mango</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de Mango con chamoy</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Moy de Fresa</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de Fresa con chamoy</p></div>
+                        <h3 class="text-[11px] font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Frutales</h3>
+                        <div class="flex flex-col gap-2">
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Chidorindo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de tamarindo</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Moy de Mango</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de Mango con chamoy</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Moy de Fresa</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de Fresa con chamoy</p></div>
                         </div>
                     </div>
 
                     <!-- Clásicos -->
                     <div>
-                        <h3 class="text-[13px] font-sans font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Clásicos</h3>
-                        <div class="flex flex-col gap-1.5">
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Café</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de café</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Mokazo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de moca</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Cajetastico</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de cajeta</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Mazapaton</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de mazapan</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Nutella</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$70</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de nutella</p></div>
+                        <h3 class="text-[11px] font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Clásicos</h3>
+                        <div class="flex flex-col gap-2">
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Café</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de café</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Mokazo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de moca</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Cajetastico</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de cajeta</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Mazapaton</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de mazapan</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Nutella</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$70</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de nutella</p></div>
                         </div>
                     </div>
 
                     <!-- Especiales -->
                     <div>
-                        <h3 class="text-[13px] font-sans font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Especiales</h3>
-                        <div class="flex flex-col gap-1.5">
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Fresauria</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$90</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de fresas con crema</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Queso Morita</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$80</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de zarzamora con queso</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Piñurt</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$45</span><span class="w-20 text-right">$75</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de piña-coco con yoghurt</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Rojo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$85</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de frutos rojos con yoghurt</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Turinito</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$90</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de conejito turin</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Kinder Delicioso</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$90</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de kinder delicioso</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Abuelita</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$80</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de chocolate abuelita</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[15px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Frapporeo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-base font-semibold text-theme-orange justify-end"><span class="w-16 text-right">$50</span><span class="w-20 text-right">$80</span></div></div><p class="text-[11px] font-sans text-theme-textMuted leading-tight">Frappé de oreo</p></div>
+                        <h3 class="text-[11px] font-bold text-theme-textMuted mb-2 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Especiales</h3>
+                        <div class="flex flex-col gap-2">
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Fresauria</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$90</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de fresas con crema</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Queso Morita</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$80</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de zarzamora con queso</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Piñurt</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$45</span><span class="w-14 text-right">$75</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de piña-coco con yoghurt</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Rojo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$85</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de frutos rojos con yoghurt</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Turinito</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$90</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de conejito turin</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Kinder Delicioso</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$90</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de kinder delicioso</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Abuelita</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$80</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de chocolate abuelita</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[13px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Frapporeo</h4><div class="dotted-leader"></div><div class="flex gap-4 text-[13px] font-semibold text-theme-orange justify-end"><span class="w-10 text-right">$50</span><span class="w-14 text-right">$80</span></div></div><p class="text-[9px] text-theme-textMuted leading-none mt-1">Frappé de oreo</p></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Margen inferior decorativo -->
-            <div class="bg-theme-orange h-6 w-full shrink-0"></div>
+            <div class="bg-theme-orange h-3 w-full shrink-0"></div>
         </div>
 
-
-        <!-- ================= SECCIÓN 3: SNACKS ================= -->
+        <!-- ================= PÁGINA 4: SNACKS ================= -->
         <div class="print-page border border-gray-300">
-            <!-- Encabezado Simple -->
-            <div class="bg-theme-orange w-full h-8 relative shrink-0">
-                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="bg-theme-orange w-full h-4 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
             </div>
 
-            <div class="py-8 px-10 flex-grow flex flex-col justify-start">
-                <div class="flex justify-between items-end border-b-2 border-theme-border pb-3 mb-8">
+            <div class="p-8 flex-grow flex flex-col justify-start">
+                <div class="flex justify-between items-end border-b-2 border-theme-border pb-2 mb-6">
                     <h2 class="text-2xl font-serif font-bold text-theme-orange flex items-center uppercase tracking-wide">
-                        <i data-lucide="utensils" class="w-7 h-7 mr-3 text-theme-pink"></i> Snacks
+                        <i data-lucide="utensils" class="w-6 h-6 mr-2 text-theme-pink"></i> Snacks
                     </h2>
                 </div>
 
-                <div class="flex flex-col gap-6 mb-10">
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papitas</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$60</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">Papas a la francesa con dos aderezos</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papurrias</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$80</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">Papas a la francesa con dos aderezos y dos toppings</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papurrias Plus</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$100</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">Papas a la francesa con cuatro complementos, dos toppings y dos aderezos</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Dedonios</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$75</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">Seis dedos de queso 100% mozzarella</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Boneless</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$90</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">180 gramos de boneless bañados en una salsa acompañados de un aderezo</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Hamburguesa</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$95</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">Hamburguesa con queso y papas</p></div>
-                    <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Alitas</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$120</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed">6 piezas de alas más papas a la francesa</p></div>
+                <div class="flex flex-col gap-5 mb-8">
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papitas</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$60</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">Papas a la francesa con dos aderezos</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papurrias</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$80</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">Papas a la francesa con dos aderezos y dos toppings</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Papurrias Plus</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$100</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">Papas a la francesa con cuatro complementos, dos toppings y dos aderezos</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Dedonios</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$75</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">Seis dedos de queso 100% mozzarella</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Boneless</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$90</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">180 gramos de boneless bañados en una salsa acompañados de un aderezo</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Hamburguesa</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$95</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">Hamburguesa con queso y papas</p></div>
+                    <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Alitas</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$120</span></div><p class="text-[10px] text-theme-textMuted leading-snug mt-1">6 piezas de alas más papas a la francesa</p></div>
                 </div>
 
-                <div class="mt-auto grid grid-cols-2 gap-6">
+                <div class="mt-auto flex flex-col gap-4">
                     <!-- Toppings -->
-                    <div class="bg-theme-pinkLight/40 p-5 rounded-2xl border border-theme-border/60">
-                        <div class="flex justify-between items-center border-b border-theme-border pb-2 mb-4">
-                            <h3 class="text-base font-serif font-bold text-theme-orange uppercase tracking-wider">Toppings</h3>
-                            <span class="text-theme-pink font-bold text-[13px]">Extra: $15</span>
+                    <div class="bg-theme-pinkLight/40 p-4 rounded-xl border border-theme-border/60">
+                        <div class="flex justify-between items-center border-b border-theme-border pb-2 mb-3">
+                            <h3 class="text-[13px] font-serif font-bold text-theme-orange uppercase tracking-wider">Toppings</h3>
+                            <span class="text-theme-pink font-bold text-[11px]">Extra: $15</span>
                         </div>
-                        <ul class="flex flex-col gap-2.5 text-xs text-theme-textMain font-medium">
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-3 shrink-0"></span> Tocino</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-3 shrink-0"></span> Ajonjolí</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-3 shrink-0"></span> Queso Parmesano</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-3 shrink-0"></span> Cebollas Crujientes</li>
+                        <ul class="grid grid-cols-2 gap-2 text-[10px] text-theme-textMain font-medium">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Tocino</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ajonjolí</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Queso Parmesano</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Cebollas Cruj.</li>
                         </ul>
                     </div>
                     <!-- Salsas -->
-                    <div class="bg-theme-pinkLight/40 p-5 rounded-2xl border border-theme-border/60">
-                        <div class="flex justify-between items-center border-b border-theme-border pb-2 mb-4">
-                            <h3 class="text-base font-serif font-bold text-theme-orange uppercase tracking-wider">Salsas y Aderezos</h3>
-                            <span class="text-theme-pink font-bold text-[13px]">Extra: $15</span>
+                    <div class="bg-theme-pinkLight/40 p-4 rounded-xl border border-theme-border/60">
+                        <div class="flex justify-between items-center border-b border-theme-border pb-2 mb-3">
+                            <h3 class="text-[13px] font-serif font-bold text-theme-orange uppercase tracking-wider">Salsas y Aderezos</h3>
+                            <span class="text-theme-pink font-bold text-[11px]">Extra: $15</span>
                         </div>
-                        <ul class="grid grid-cols-2 gap-x-3 gap-y-2.5 text-xs text-theme-textMain font-medium">
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Piquín c/ Limón</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Blue Cheese</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ranch Habanero</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ajo Parmesano</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Mandarina Chip.</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Salsa Tomate</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ranch</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Queso</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> BBQ</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Catsup</li>
-                            <li class="flex items-center"><span class="w-2 h-2 bg-theme-pink rounded-full mr-2 shrink-0"></span> Mango Hab.</li>
+                        <ul class="grid grid-cols-2 gap-x-2 gap-y-2 text-[10px] text-theme-textMain font-medium">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Piquín c/ Limón</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Blue Cheese</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ranch Habanero</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ajo Parmesano</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Mandarina Chip.</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Salsa de Tomate</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Ranch</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Queso</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> BBQ</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Catsup</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-theme-pink rounded-full mr-2 shrink-0"></span> Mango Habanero</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- Margen inferior decorativo -->
-            <div class="bg-theme-orange h-6 w-full shrink-0"></div>
+            <div class="bg-theme-orange h-3 w-full shrink-0"></div>
         </div>
 
-
-        <!-- ================= SECCIÓN 4: CREPAS Y WAFFLES ================= -->
+        <!-- ================= PÁGINA 5: CREPAS Y WAFFLES ================= -->
         <div class="print-page border border-gray-300">
-            <!-- Encabezado Simple -->
-            <div class="bg-theme-orange w-full h-8 relative shrink-0">
-                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="bg-theme-orange w-full h-4 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
             </div>
 
-            <div class="py-8 px-10 flex-grow flex flex-col justify-start">
-                <div class="flex justify-between items-end border-b-2 border-theme-border pb-3 mb-8">
+            <div class="p-8 flex-grow flex flex-col justify-start">
+                <div class="flex justify-between items-end border-b-2 border-theme-border pb-2 mb-6">
                     <h2 class="text-2xl font-serif font-bold text-theme-orange flex items-center uppercase tracking-wide">
-                        <i data-lucide="utensils-crossed" class="w-7 h-7 mr-3 text-theme-pink"></i> Crepas y Waffles
+                        <i data-lucide="utensils-crossed" class="w-6 h-6 mr-2 text-theme-pink"></i> Crepas y Waffles
                     </h2>
                 </div>
 
                 <div class="flex flex-col gap-6">
                     <!-- Dulces -->
                     <div>
-                        <h3 class="text-sm font-sans font-bold text-theme-textMuted mb-4 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Dulces (Crepas y Waffles)</h3>
-                        <div class="flex flex-col gap-5">
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Sencilla</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$60</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed pr-8">Elige 2 ingredientes: Queso Philadelphia, mermeladas de la casa, Nutella, Lechera, Cajeta o Crema de cacahuate.</p></div>
-                            <div><div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Frutales</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$75</span></div><p class="text-xs font-sans text-theme-textMuted mt-1 leading-relaxed pr-8">Sencilla + fruta: Durazno, piña, plátano. <br><span class="text-theme-pink font-semibold">Temporada:</span> Fresa, mango y uva.</p></div>
+                        <h3 class="text-[12px] font-bold text-theme-textMuted mb-3 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Dulces (Crepas y Waffles)</h3>
+                        <div class="flex flex-col gap-4">
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Sencilla</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$60</span></div><p class="text-[10px] text-theme-textMuted mt-1 leading-relaxed pr-4">Elige 2 ingredientes: Queso Philadelphia, mermeladas de la casa, Nutella, Lechera, Cajeta o Crema de cacahuate.</p></div>
+                            <div><div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Frutales</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$75</span></div><p class="text-[10px] text-theme-textMuted mt-1 leading-relaxed pr-4">Sencilla + fruta: Durazno, piña, plátano.<br><span class="text-theme-pink font-semibold">Temporada:</span> Fresa, mango y uva.</p></div>
                         </div>
                     </div>
 
                     <!-- Especiales -->
                     <div class="mt-2">
-                        <h3 class="text-sm font-sans font-bold text-theme-textMuted mb-4 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Especiales (Solo Crepas)</h3>
-                        <div class="flex flex-col gap-5">
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Guayaba c/ Mozzarella</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$85</span></div>
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Lotus Biscoff</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$85</span></div>
+                        <h3 class="text-[12px] font-bold text-theme-textMuted mb-3 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Especiales (Solo Crepas)</h3>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Guayaba c/ Mozzarella</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$85</span></div>
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Lotus Biscoff</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$85</span></div>
                         </div>
                     </div>
 
                     <!-- Saladas -->
                     <div class="mt-2">
-                        <h3 class="text-sm font-sans font-bold text-theme-textMuted mb-4 uppercase tracking-widest border-l-4 border-theme-pink pl-3">Saladas (Solo Crepas)</h3>
-                        <div class="flex flex-col gap-5 pt-1">
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Hawaiana</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$80</span></div>
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Peperoni</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$80</span></div>
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Tres Quesos</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$80</span></div>
-                            <div class="flex justify-between items-baseline"><h4 class="text-[17px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Champiñones</h4><div class="dotted-leader"></div><span class="text-lg font-semibold text-theme-orange">$80</span></div>
+                        <h3 class="text-[12px] font-bold text-theme-textMuted mb-3 uppercase tracking-widest border-l-2 border-theme-pink pl-2">Saladas (Solo Crepas)</h3>
+                        <div class="flex flex-col gap-4 pt-1">
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Hawaiana</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$80</span></div>
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Peperoni</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$80</span></div>
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Tres Quesos</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$80</span></div>
+                            <div class="flex justify-between items-baseline"><h4 class="text-[14px] font-serif font-bold text-theme-textMain uppercase tracking-wide">Champiñones</h4><div class="dotted-leader"></div><span class="text-[15px] font-semibold text-theme-orange">$80</span></div>
                         </div>
                     </div>
 
                     <!-- Ingrediente Extra -->
-                    <div class="mt-6 bg-theme-pinkLight/40 p-5 rounded-2xl border border-theme-border/60 flex justify-between items-center">
-                        <h3 class="text-base font-sans font-bold text-theme-textMain uppercase tracking-widest">Ingrediente Extra</h3>
-                        <span class="text-theme-pink font-bold text-xl">+$15</span>
+                    <div class="mt-auto bg-theme-pinkLight/40 p-5 rounded-2xl border border-theme-border/60 flex justify-between items-center">
+                        <h3 class="text-[13px] font-bold text-theme-textMain uppercase tracking-widest">Ingrediente Extra</h3>
+                        <span class="text-theme-pink font-bold text-base">+$15</span>
                     </div>
                 </div>
             </div>
-            <!-- Margen inferior decorativo -->
-            <div class="bg-theme-orange h-6 w-full shrink-0"></div>
+            <div class="bg-theme-orange h-3 w-full shrink-0"></div>
+        </div>
+
+        <!-- ================= PÁGINA 6: CONTRAPORTADA ================= -->
+        <div class="print-page border border-gray-300">
+            <div class="bg-theme-orange w-full h-10 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
+            </div>
+            
+            <div class="flex-grow flex flex-col items-center justify-center p-8 relative bg-theme-pinkLight/20">
+                <i data-lucide="heart" class="w-16 h-16 text-theme-pink mb-6 drop-shadow-sm"></i>
+                <h2 class="font-serif font-bold text-2xl text-theme-orange text-center leading-snug mb-3">¡Gracias por<br>tu preferencia!</h2>
+                <div class="w-12 h-0.5 bg-theme-border mb-6"></div>
+                <p class="text-theme-textMain text-xs text-center max-w-[200px] leading-relaxed mb-10">Esperamos que hayas disfrutado tu experiencia con nosotros.</p>
+                
+                <div class="flex gap-4 text-theme-textMuted opacity-60">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                </div>
+            </div>
+
+            <div class="bg-theme-orange w-full h-10 relative shrink-0">
+                <div class="absolute top-0 left-0 w-full h-full opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 15px 15px;"></div>
+            </div>
         </div>
 
     </div>
